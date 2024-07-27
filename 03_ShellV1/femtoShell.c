@@ -21,23 +21,23 @@ void clearBuffer(uint8_t* buf, uint8_t size);
 
 int main() {
 
-    uint8_t command[COMMAND_SIZE];
+        uint8_t command[COMMAND_SIZE];
 	uint8_t echoMsg[MSG_SIZE];
 	uint8_t *buf[BUFF_SIZE];
 	uint8_t pathBuf[PATH_MAX];
-    uint8_t i = 0;
+        uint8_t i = 0;
 	ssize_t bytesR;
 	ssize_t bytesW;
 	uint8_t iterator = 0;
 
 	while (1) {
 		/* Print the prompt */
-	    bytesW == -1 ? perror("write: error") :  
+	    	bytesW == -1 ? perror("write: error") :  
 		               write(STDOUT, "O2mor Ya Basha>:$ ", strlen("O2mor Ya Basha>:$ "));			
 		
 		/* Read command from the user */
 		bytesR == -1 ? perror("write: error") : 
-			           read(STDIN, command, 100);
+			       read(STDIN, command, 100);
 
 		/* Skip to the next iteration to print the prompt again */
         	if (strlen(command) == 1) {
@@ -47,8 +47,8 @@ int main() {
 
 		/* Remove the newline character if present */
         	if (command[strlen(command) - 1] == '\n') {
-				command[strlen(command) - 1] = '\0';
-			}
+			command[strlen(command) - 1] = '\0';
+		}
 
 		/* Store the rest of the input after the "echo " command */
 		iterator = 0;
@@ -65,7 +65,7 @@ int main() {
 		}
 		echoMsg[iterator] = '\0';
 
-        uint8_t* token = strtok(command, " ");
+                uint8_t* token = strtok(command, " ");
 
 		/* Exit the loop if command is "exit" */
 		if (!strcmp(token, "exit")) {
@@ -74,60 +74,50 @@ int main() {
 		}
 		
 		i = 0;
-        while (token != NULL) {
+        	while (token != NULL) {
 			buf[i++] = token; 	
 			token = strtok(NULL, " ");
-       	}
+       		}
                         
 		/*Check the user command and execute it*/        
 		if (!strcmp(buf[0], "pwd")) {
-
 			ImplementPwdCommand(i);
 
 		} else if (!strcmp(buf[0], "help")) {
-
 			buf[1] = "myhelp.txt";
 			ImplementCatCommand(2, buf);
-
+			
 		} else if (!strcmp(buf[0], "cat")) {
-
 			ImplementCatCommand(i, buf);
-
+			
 		} else if (!strcmp(buf[0], "cp")) {
-
 			ImplementCpCommand(i, buf);
-
+			
 		} else if (!strcmp(buf[0], "mv")) {
-
 			ImplementMvCommand(i, buf);
-
+			
 		} else if (!strcmp(buf[0], "echo")) {
-
 			i == 1 ? printf("\n") : 
-				     ImplementEchoCommand(echoMsg);
-
+				 ImplementEchoCommand(echoMsg);
+			
 		} else if (!strcmp(buf[0], "realpath")) {
-
 			FindRealPath(buf[1], pathBuf);
 			printf("%s\n", pathBuf);
-
+			
 		} else if (!strcmp(buf[0], "rmdir")) {
-
 			for(iterator = 1; iterator < i; iterator++) {
-				RemoveDirectory(buf[iterator]);
+				RemoveDirectory(buf[iterator]);	
 			}
-
+			
 		} else if (!strcmp(buf[0], "rm")) {
-
-            for(iterator = 1; iterator < i; iterator++) {
-                    RemoveFile(buf[iterator]);
-            }
-
+            		for(iterator = 1; iterator < i; iterator++) {
+                   	 	RemoveFile(buf[iterator]);
+			}
+			
 		} else {
-
 			printf("Command '%s' not found, but can be used help command:\n", buf[0]);
 			printf("  to know about my supported command\n"); 
-
+			
 		}
 
 		clearBuffer(command, COMMAND_SIZE);
