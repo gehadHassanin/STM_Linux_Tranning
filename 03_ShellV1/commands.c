@@ -146,7 +146,7 @@ void ImplementMvCommand(uint8_t argc, uint8_t** argv) {
                		strcat(distinationPath, Get_FileName(sourcePath));
 		}
 		
-		if (argc == 3 && CheckFileInPath(distinationPath) == 0) {
+		if (argc == 3 && CheckFileInPath(distinationPath) == 0 && strcmp(distinationPath, sourcePath) != 0) {
 			perror("mv");
 		} else {
 			if (rename(sourcePath, distinationPath) == -1) {
