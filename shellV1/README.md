@@ -26,5 +26,9 @@ The program will ask you to enter specified commands <BR>
 | rmdir          | remove directories                          |  filesname               | rmdir dir1 dir2                  |
 
 
-## Example of the output:
+## Example of the output: <BR>
+<img src="https://github.com/user-attachments/assets/72a98ba6-0564-47f7-8ef8-07e920982a28">
+<img src="https://github.com/user-attachments/assets/e825d27e-301e-481a-afc9-d87066536a2f">
+<img src="https://github.com/user-attachments/assets/967dd6e5-4c2e-45f6-9742-5db76512dde1">
+<img src="https://github.com/user-attachments/assets/907440f5-02ad-4916-bfaa-3274b211bbb1">
 
