@@ -1,0 +1,10 @@
+Supported commands are:
+    1) cp: copy a file to another file.
+    2) mv: move a file to another place.
+    3) pwd: print working directory.
+    4) cat: concatenate files and print on the standard output.
+    5) echo: print a user input string on stdout.
+    6) realpath:  Print the resolved absolute file name.
+    7) exit: terminate the shell.
+    8) rm: remove files 
+    9) rmdir: remove directories
