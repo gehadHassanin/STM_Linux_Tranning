@@ -2,7 +2,7 @@
  
 ## Compilation
 ```
-gcc commands.c femtoShell.c -o 
+gcc commands.c femtoShell.c -o cmd 
 ```
 ## Running 
 ```
