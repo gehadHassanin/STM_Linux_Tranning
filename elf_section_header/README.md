@@ -57,4 +57,4 @@ The section header table contains entries that describe each section in the ELF 
 `./Header elfFile -S`<BR>
 
 ## Examble of the output:
-<img src="">
+<img src="https://github.com/user-attachments/assets/a963f642-2a5e-49da-9244-dc031b7e5897">
