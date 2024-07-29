@@ -34,13 +34,13 @@ int main() {
 		/* Print the prompt message */
 		bytesW = write(STDOUT, "O2mor Ya Basha>:$ ", strlen("O2mor Ya Basha>:$ "));
 		if (bytesW == -1) {
-			perror("write: error");
+			perror("write");
 		}
 	    		
 		/* Read command from the user */
 		bytesR = read(STDIN, command, 100);
 		if (bytesR == -1) {
-			perror("write: error");
+			perror("read");
 		}
 
 		/* Skip to the next iteration to print the prompt again */
