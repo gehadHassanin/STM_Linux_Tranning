@@ -160,7 +160,7 @@ void ImplementMvCommand(uint8_t argc, uint8_t** argv) {
 
 void FindRealPath(uint8_t* file, uint8_t* pathBuf) {
 	if(realpath(file, pathBuf) == NULL) {
-		perror("realPath");
+		perror("realpath");
 	}
 }
 
