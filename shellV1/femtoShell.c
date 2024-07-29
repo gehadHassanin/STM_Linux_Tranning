@@ -31,13 +31,17 @@ int main() {
 	uint8_t iterator = 0;
 
 	while (1) {
-		/* Print the prompt */
-	    	bytesW == -1 ? perror("write: error") :  
-		               write(STDOUT, "O2mor Ya Basha>:$ ", strlen("O2mor Ya Basha>:$ "));			
-		
+		/* Print the prompt message */
+		bytesW = write(STDOUT, "O2mor Ya Basha>:$ ", strlen("O2mor Ya Basha>:$ "));
+		if (bytesW == -1) {
+			perror("write: error");
+		}
+	    		
 		/* Read command from the user */
-		bytesR == -1 ? perror("write: error") : 
-			       read(STDIN, command, 100);
+		bytesR = read(STDIN, command, 100);
+		if (bytesR == -1) {
+			perror("write: error");
+		}
 
 		/* Skip to the next iteration to print the prompt again */
         	if (strlen(command) == 1) {
@@ -66,21 +70,19 @@ int main() {
 		echoMsg[iterator] = '\0';
 
                 uint8_t* token = strtok(command, " ");
-
-		/* Exit the loop if command is "exit" */
 		if (!strcmp(token, "exit")) {
-			write(STDOUT, "Goodbye\n", strlen("Goodbye\n"));
-			exit(EXIT_FAILURE);
-		}
-		
+                        write(STDOUT, "Goodbye\n", strlen("Goodbye\n"));
+                        exit(EXIT_FAILURE);
+                }
+
 		i = 0;
         	while (token != NULL) {
 			buf[i++] = token; 	
 			token = strtok(NULL, " ");
        		}
                         
-		/*Check the user command and execute it*/        
-		if (!strcmp(buf[0], "pwd")) {
+		/*Check the user command and execute it*/     
+	        if (!strcmp(buf[0], "pwd")) {
 			ImplementPwdCommand(i);
 
 		} else if (!strcmp(buf[0], "help")) {
