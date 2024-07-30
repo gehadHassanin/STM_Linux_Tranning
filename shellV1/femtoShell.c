@@ -23,9 +23,10 @@ int main() {
 
         uint8_t command[COMMAND_SIZE];
 	uint8_t echoMsg[MSG_SIZE];
-	uint8_t *buf[BUFF_SIZE];
+	uint8_t *myargv[BUFF_SIZE];
 	uint8_t pathBuf[PATH_MAX];
-        uint8_t i = 0;
+        uint8_t myargc = 0;
+	uint8_t i = 0;
 	ssize_t bytesR;
 	ssize_t bytesW;
 	uint8_t iterator = 0;
@@ -77,49 +78,52 @@ int main() {
                         exit(EXIT_FAILURE);
                 }
 
-		i = 0;
+		myargc = 0;
         	while (token != NULL) {
-			buf[i++] = token; 	
+			myargv[myargc++] = token; 	
 			token = strtok(NULL, " ");
        		}
                         
 		/*Check the user command and execute it*/     
-	        if (!strcmp(buf[0], "pwd")) {
-			ImplementPwdCommand(i);
+	        if (!strcmp(myargv[0], "pwd")) {
+			ImplementPwdCommand(myargc);
 
-		} else if (!strcmp(buf[0], "help")) {
-			buf[1] = "myhelp.txt";
-			ImplementCatCommand(2, buf);
+		} else if (!strcmp(myargv[0], "help")) {
+			myargv[1] = "myhelp.txt";
+			ImplementCatCommand(2, myargv);
 			
-		} else if (!strcmp(buf[0], "cat")) {
-			ImplementCatCommand(i, buf);
+		} else if (!strcmp(myargv[0], "cat")) {
+			ImplementCatCommand(myargc, myargv);
 			
-		} else if (!strcmp(buf[0], "cp")) {
-			ImplementCpCommand(i, buf);
+		} else if (!strcmp(myargv[0], "cp")) {
+			ImplementCpCommand(myargc, myargv);
 			
-		} else if (!strcmp(buf[0], "mv")) {
-			ImplementMvCommand(i, buf);
+		} else if (!strcmp(myargv[0], "mv")) {
+			ImplementMvCommand(myargc, myargv);
 			
-		} else if (!strcmp(buf[0], "echo")) {
-			i == 1 ? printf("\n") : 
+		} else if (!strcmp(myargv[0], "echo")) {
+			myargc == 1 ? printf("\n") : 
 				 ImplementEchoCommand(echoMsg);
 			
-		} else if (!strcmp(buf[0], "realpath")) {
-			FindRealPath(buf[1], pathBuf);
+		} else if (!strcmp(myargv[0], "realpath")) {
+			FindRealPath(myargv[1], pathBuf);
 			printf("%s\n", pathBuf);
 			
-		} else if (!strcmp(buf[0], "rmdir")) {
-			for(iterator = 1; iterator < i; iterator++) {
-				RemoveDirectory(buf[iterator]);	
+		} else if (!strcmp(myargv[0], "rmdir")) {
+			for(iterator = 1; iterator < myargc; iterator++) {
+				RemoveDirectory(myargv[iterator]);	
 			}
 			
-		} else if (!strcmp(buf[0], "rm")) {
-            		for(iterator = 1; iterator < i; iterator++) {
-                   	 	RemoveFile(buf[iterator]);
+		} else if (!strcmp(myargv[0], "rm")) {
+            		for(iterator = 1; iterator < myargc; iterator++) {
+                   	 	RemoveFile(myargv[iterator]);
 			}
+
+		} else if (!strcmp(myargv[0], "cd")) {
+			ChangeCurrentDirectory(myargc, myargv);
 			
 		} else {
-			printf("Command '%s' not found, but can be used help command:\n", buf[0]);
+			printf("Command '%s' not found, but can be used help command:\n", myargv[0]);
 			printf("  to know about my supported command\n"); 
 			
 		}

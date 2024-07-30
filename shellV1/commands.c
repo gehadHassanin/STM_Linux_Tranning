@@ -80,7 +80,7 @@ void ImplementCpCommand(uint8_t argc, uint8_t** argv) {
         
 	if (argc == 3 || (argc == 4 && !strcmp(argv[1], "-a"))) {
                 FindRealPath(argv[argc - 2], sourcePath);
-                FindRealPath(argv[argc - 1], distinationPath);
+                realpath(argv[argc - 1], distinationPath);
 
                 if (!strcmp(distinationPath, sourcePath)) {
                         fprintf(stderr, "cp: '%s' and '%s' are the same file\n", argv[argc - 2], argv[argc - 1]);
@@ -155,6 +155,16 @@ void ImplementMvCommand(uint8_t argc, uint8_t** argv) {
        		}
 	} else {
 		perror("mv: argc");
+	}
+}
+
+void ChangeCurrentDirectory(uint8_t argc, uint8_t** argv) {
+	if (argc == 2) {
+		if (chdir(argv[1]) == -1) {
+			perror("cd");
+	        }
+	} else {
+		perror("argc");
 	}
 }
 
