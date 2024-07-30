@@ -38,6 +38,7 @@ int main() {
 		}
 	    		
 		/* Read command from the user */
+		clearBuffer(command, COMMAND_SIZE);
 		bytesR = read(STDIN, command, 100);
 		if (bytesR == -1) {
 			perror("write: error");
@@ -49,7 +50,7 @@ int main() {
             		continue; 
         	}
 
-		/* Remove the newline character if present */
+		/* Remove the newline character if present */ 
         	if (command[strlen(command) - 1] == '\n') {
 			command[strlen(command) - 1] = '\0';
 		}
@@ -57,6 +58,7 @@ int main() {
 		/* Store the rest of the input after the "echo " command */
 		iterator = 0;
 		i = 5;
+		clearBuffer(echoMsg, MSG_SIZE);
 		while (command[i] != '\0') {
 			if (command[i] == '"' && command[i + 1] != '\0') {
 				echoMsg[iterator++] = command[++i];
@@ -121,9 +123,6 @@ int main() {
 			printf("  to know about my supported command\n"); 
 			
 		}
-
-		clearBuffer(command, COMMAND_SIZE);
-		clearBuffer(echoMsg, MSG_SIZE);
 	}
         return 0;
 }
