@@ -4,8 +4,8 @@
 #define SIZE_HISTORY (1000)
 #define SIZE_BUFF    (100)
 #define MSG_SIZE     (100)
-#define COMMAND_SIZE  (100)
-#define BUFF_SIZE     (10)
+#define COMMAND_SIZE (100)
+#define BUFF_SIZE    (10)
 
 #define STDIN  (0)
 #define STDOUT (1)
@@ -42,12 +42,12 @@ void ImplementEnvCommand(uint8_t argc, uint8_t** argv);
 void ImplementTypeCommand(uint8_t argc, uint8_t** argv);
 int8_t Is_InternalCmd(uint8_t *cmd);
 int8_t Is_ExternalCmd(const uint8_t *cmd);
-uint32_t Get_Size(ProcessHist_t *pHistory);
 void clear_screen(void) ;
-void Push_Process(ProcessHist_t *pHistory, ProcessInfo_t *pInfo);
 void Traverse_History(ProcessHist_t *pHistory, uint32_t size);
-void Display_History(ProcessInfo_t *pInfo);
-void Parsing(uint8_t command[], uint8_t *__token[], uint8_t *token_num);
+uint32_t Get_Size(ProcessHist_t *pHistory);
+void Push_Process(ProcessHist_t *pHistory, ProcessInfo_t *pInfo);
+static void Display_History(ProcessInfo_t *pInfo);
+static void Parsing(uint8_t command[], uint8_t *__token[], uint8_t *token_num);
 static int8_t CheckFileInPath(const uint8_t* filePath);
 static int8_t Is_File(const uint8_t* pathName);
 static int8_t Is_Directory(const uint8_t* pathName);
