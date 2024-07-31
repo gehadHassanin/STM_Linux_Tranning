@@ -16,11 +16,11 @@ void StoreMsg(uint8_t command[], uint8_t *echoMsg);
 void ParsingInput(uint8_t command[], uint8_t *__token[], uint8_t *token_num);
 
 int main() {
-    uint8_t *command;
+        uint8_t *command;
 	uint8_t *echoMsg;
 	uint8_t **myargv;
 	uint8_t pathBuf[PATH_MAX];
-    uint8_t myargc = 0;
+        uint8_t myargc = 0;
 	pid_t ret_pid;
 	uint8_t iterator = 0;
 	ProcessInfo_t Info;
@@ -28,140 +28,140 @@ int main() {
 	History.top__ = 0;
 
 	while (1) {
-		/* allocate dynamic memory */
+	/* allocate dynamic memory */
         command = (uint8_t *) malloc(COMMAND_SIZE); 
         myargv = (uint8_t **) malloc(BUFF_SIZE * sizeof(uint8_t **)); 
-		echoMsg = (uint8_t *) malloc(COMMAND_SIZE); 
+	echoMsg = (uint8_t *) malloc(COMMAND_SIZE); 
 
         /* Print the prompt message */
         if (write(STDOUT, "O2mor Ya Basha>:$ ", strlen("O2mor Ya Basha>:$ ")) == -1) 
-		{
+	{
             perror("write");
         }
 
         /* Read command from the user */
-		clearBuffer(command, COMMAND_SIZE);
+	clearBuffer(command, COMMAND_SIZE);
         if (read(STDIN, command, 100) == -1) 
-		{
+	{
             perror("read");
         }
 
         /* Remove the newline character if present */
         if (command[strlen(command) - 1] == '\n') 
-		{  
+	{  
             command[strlen(command) - 1] = '\0';
         }
 		
 
         /* Skip to the next iteration to print the prompt again */
         if (strlen(command) == 0) 
-		{
+	{
 			continue;
         }
 
-		/* Store the rest of the input after the "echo " command */
-		StoreMsg(command, echoMsg);
+	/* Store the rest of the input after the "echo " command */
+	StoreMsg(command, echoMsg);
 
-		ParsingInput(command, myargv, &myargc);
+	ParsingInput(command, myargv, &myargc);
                       
-		/*Check the user command and execute it*/ 
-		if (Is_InternalCmd(myargv[0]) == 0)
+	/*Check the user command and execute it*/ 
+	if (Is_InternalCmd(myargv[0]) == 0)
+	{
+		if (!strcmp(myargv[0], "exit")) 
 		{
-			if (!strcmp(myargv[0], "exit")) 
-			{
         	    write(STDOUT, "Goodbye\n", strlen("Goodbye\n"));
         	    exit(EXIT_FAILURE);
 
         	} else if (!strcmp(myargv[0], "mypwd")) 
+		{
+			ImplementPwdCommand(myargc);
+
+		} else if (!strcmp(myargv[0], "help")) 
+		{
+			myargv[1] = "myhelp.txt";
+			ImplementCatCommand(2, myargv);
+
+		} else if (!strcmp(myargv[0], "mycat")) 
+		{
+			ImplementCatCommand(myargc, myargv);
+
+		} else if (!strcmp(myargv[0], "mycp")) 
+		{
+			ImplementCpCommand(myargc, myargv);
+
+		} else if (!strcmp(myargv[0], "mymv")) 
+		{
+			ImplementMvCommand(myargc, myargv);
+
+		} else if (!strcmp(myargv[0], "myecho")) 
+		{
+			myargc == 1 ? printf("\n") : 
+			ImplementEchoCommand(echoMsg);
+			free(echoMsg);
+
+		} else if (!strcmp(myargv[0], "myrealpath")) 
+		{
+			if (myargc == 2) 
 			{
-				ImplementPwdCommand(myargc);
+				FindRealPath(myargv[1], pathBuf);
+				printf("%s\n", pathBuf);
 
-			} else if (!strcmp(myargv[0], "help")) 
+			} else 
 			{
-				myargv[1] = "myhelp.txt";
-				ImplementCatCommand(2, myargv);
-
-			} else if (!strcmp(myargv[0], "mycat")) 
-			{
-				ImplementCatCommand(myargc, myargv);
-
-			} else if (!strcmp(myargv[0], "mycp")) 
-			{
-				ImplementCpCommand(myargc, myargv);
-
-			} else if (!strcmp(myargv[0], "mymv")) 
-			{
-				ImplementMvCommand(myargc, myargv);
-
-			} else if (!strcmp(myargv[0], "myecho")) 
-			{
-				myargc == 1 ? printf("\n") : 
-				ImplementEchoCommand(echoMsg);
-				free(echoMsg);
-
-			} else if (!strcmp(myargv[0], "myrealpath")) 
-			{
-				if (myargc == 2) 
-				{
-					FindRealPath(myargv[1], pathBuf);
-					printf("%s\n", pathBuf);
-
-				} else 
-				{
-					perror("realpath: Invalid argument");
-					continue;
-				}
-
-			} else if (!strcmp(myargv[0], "myrmdir")) 
-			{
-				for(iterator = 1; iterator < myargc; iterator++) 
-				{
-					RemoveDirectory(myargv[iterator]);	
-				}
-
-			} else if (!strcmp(myargv[0], "myrm"))
-			{
-				for(iterator = 1; iterator < myargc; iterator++) 
-				{
-        	        RemoveFile(myargv[iterator]);
-				}
-
-			} else if (!strcmp(myargv[0], "cd")) 
-			{
-				ChangeCurrentDirectory(myargc, myargv);
-
-			} else if (!strcmp(myargv[0], "envir")) 
-			{
-				ImplementEnvCommand(myargc, myargv);
-
-			} else if (!strcmp(myargv[0], "type")) 
-			{
-				ImplementTypeCommand(myargc, myargv);
-
-			} else if (!strcmp(myargv[0], "clear")) 
-			{
-				clear_screen();
-
-			}else if (!strcmp(myargv[0], "phist")) 
-			{
-				printf("%-8s %-10s %s\n", "PID", "Status", "Command");
-
-				if (Get_Size(&History) < NUM_PROCESS) 
-				{
-					Traverse_History(&History, Get_Size(&History));
-
-				} else 
-				{
-					Traverse_History(&History, NUM_PROCESS);
-				}
-
+				perror("realpath: Invalid argument");
+				continue;
 			}
 
-			free(myargv);
+		} else if (!strcmp(myargv[0], "myrmdir")) 
+		{
+			for(iterator = 1; iterator < myargc; iterator++) 
+			{
+				RemoveDirectory(myargv[iterator]);	
+			}
+
+		} else if (!strcmp(myargv[0], "myrm"))
+		{
+			for(iterator = 1; iterator < myargc; iterator++) 
+			{ 
+				RemoveFile(myargv[iterator]);
+			}
+
+		} else if (!strcmp(myargv[0], "cd")) 
+		{
+			ChangeCurrentDirectory(myargc, myargv);
+
+		} else if (!strcmp(myargv[0], "envir")) 
+		{
+			ImplementEnvCommand(myargc, myargv);
+
+		} else if (!strcmp(myargv[0], "type")) 
+		{
+			ImplementTypeCommand(myargc, myargv);
+
+		} else if (!strcmp(myargv[0], "clear")) 
+		{
+			clear_screen();
+
+		}else if (!strcmp(myargv[0], "phist")) 
+		{
+			printf("%-8s %-10s %s\n", "PID", "Status", "Command");
+
+			if (Get_Size(&History) < NUM_PROCESS) 
+			{
+				Traverse_History(&History, Get_Size(&History));
+
+			} else 
+			{
+				Traverse_History(&History, NUM_PROCESS);
+			}
+
+		}
+
+		free(myargv);
         	free(command);
 
-		} else if (Is_ExternalCmd(myargv[0]) == 0)
-		{
+	} else if (Is_ExternalCmd(myargv[0]) == 0)
+	{
         	ret_pid = fork();
 	
         	if (ret_pid == 0) 
@@ -177,7 +177,8 @@ int main() {
         	{
         	    // PARENT
         	    int32_t wstatus;
-        	    if (wait(&wstatus) == -1) {
+        	    if (wait(&wstatus) == -1) 
+		    {
         	        perror("wait");
         	    }
 
@@ -207,7 +208,7 @@ int main() {
 
 void clearBuffer(uint8_t* buf, int32_t size) {
     for (uint8_t i = 0; i < size; i++)  
-	{
+    {
         buf[i] = '\0';
     }
 }
@@ -216,14 +217,14 @@ void ParsingInput(uint8_t __command[], uint8_t *__token[], uint8_t *token_num) {
         *(token_num) = 0;   
 
         for (int32_t Iterator = 0; Iterator < BUFF_SIZE; Iterator++) 
-		{
+	{
                 __token[Iterator] = NULL;
         }
 
         uint8_t* token = strtok(__command, SPACE_DELIMETER);
 
         while (token != NULL) 
-		{
+	{
                 __token[(*(token_num))++] = token;
                 token = strtok(NULL, SPACE_DELIMETER);
         }
@@ -231,10 +232,11 @@ void ParsingInput(uint8_t __command[], uint8_t *__token[], uint8_t *token_num) {
 
 void StoreMsg(uint8_t command[], uint8_t *echoMsg) {
 		uint8_t i = 7;
-	    uint8_t iterator = 0;
+	        uint8_t iterator = 0;
 
 		clearBuffer(echoMsg, COMMAND_SIZE);
-		while (command[i] != '\0') {
+		while (command[i] != '\0') 
+		{
 			if (command[i] == '"' && command[i + 1] != '\0') 
 			{
 				echoMsg[iterator++] = command[++i];
