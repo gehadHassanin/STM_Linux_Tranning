@@ -1,29 +1,58 @@
-# How to use  
+
+# Shell program
+**This shell program supports a set of built-in commands, along with the ability to execute external commands found in the PATH environment variable.** <BR>
+
+# How to use?
+## 1) Compilation 
+```
+gcc commands.c femtoShell.c -o cmd
+```
+## 2) Running 
+```
+./cmd
+```
+## 3) Executing Commands
+**Enter commands at the prompt to execute them. Use built-in or external commands as needed.** <BR>
+## 4) Exiting the Shell
+**Use the exit command to exit the shell.** <BR>
+
  
-## Compilation 
-`gcc commands.c femtoShell.c -o cmd` 
- 
-## Running 
-`./cmd `<BR> 
- 
-The program will ask you to enter specified commands <BR> 
- 
-**NOTE** : Commands will be listed at the end of the file <BR> 
+# Built-in Commands
  
 | command name | Description                                           | Args                    |  Example                  | 
 | ------------ | -----------                                           | ----                    | ----------                | 
 | help         | show list of supported commands                       |  no                     | help                      | 
 | exit         | terminate shell                                       |  no                     | exit                      |
-| pwd          | print working directory                               |  no                     | pwd                       | 
-| cat          | show content of certain file                          |  filename               | cat file                  |
-| echo         | print a user input string on stdout                   |  message                | echo "gehad" <BR>`or`<BR> echo gehad                  | 
-| realpath          | print the resolved absolute path                            |  filePath <BR>`or`<BR> dirPath               | realpath filePath <BR>`or`<BR> realpath dirPath                   |
-| cp           | copy a file to another file                           |  sourcePath, targetPath | cp  sourcePath targetPath |
-| cp -a        | append the source content to the end of the target file |  sourcePath, targetPath | cp -a sourcePath targetPath |
-| mv           | move a file to another place           |  sourcePath, targetPath | mv sourcePath targetPath |
-| mv -f           | force overwriting the target file if exits            |  sourcePath, targetPath | mv -f sourcePath targetPath |
-| rm          | remove files                          |  filesname               | rm file1 file2                   |
-| rmdir          | remove directories                          |  filesname               | rmdir dir1 dir2                  |
+| mypwd          | print working directory                               |  no                     | mypwd                       | 
+| cd          | change the current directory to the specified path     |  specified_path           | cd ../                      | 
+| mycat          | show content of certain file                          |  filename               | mycat file                  |
+| myecho         | print a user input string on stdout                   |  message                | myecho "gehad" <BR>`or`<BR> myecho gehad                  | 
+| myrealpath          | print the resolved absolute path                            |  filePath <BR>`or`<BR> dirPath               | myrealpath filePath <BR>`or`<BR> myrealpath dirPath                   |
+| mycp           | copy a file to another file                           |  sourcePath, targetPath | mycp  sourcePath targetPath |
+| mycp -a        | append the source content to the end of the target file |  sourcePath, targetPath | mycp -a sourcePath targetPath |
+| mymv           | move a file to another place           |  sourcePath, targetPath | mymv sourcePath targetPath |
+| mymv -f           | force overwriting the target file if exits            |  sourcePath, targetPath | mymv -f sourcePath targetPath |
+| myrm           | remove files                         |  filesname        | myrm file1 file2                   |
+| myrmdir        | remove directories                   |  filesname        | myrmdir dir1 dir2                  |
+| envir          | print all the environment variables  |  no               | envir                 |
+| envir variable | print the value of this environment variable if exists   |  variable             | envir  PATH  <BR>`or`<BR> envir anyVariable|    
+| type | return the type of the command (internal, external or unsupported command)   |  command            | type ls <BR>`or`<BR> type mypwd|  
+| phist | lists the last 10 processes with their exit status   |  no           | phist | 
+| clear | clear the terminal screen   |  no           | clear | 
+# External Commands
+**The shell supports executing external commands available in the directories specified by the PATH environment variable. Commands can be executed by simply entering their names, without requiring the full path** <BR> 
+
+**`some common examples like:`**
+* `mv`: Move or rename files or directories.
+* `ls`: List directory contents.
+* `grep`: Search for patterns in files.
+* `cat`: Concatenate and display file contents.
+* `mkdir`: Create a new directory.
+* `rm`: Remove files or directories.
+* `cp`: Copy files or directories.
+* `echo`: Display a line of text or a string.
+* `ps`: Report a snapshot of current processes.
+
 
 
 ## Example of the output: <BR>
