@@ -14,7 +14,6 @@
 void clearBuffer(uint8_t* buf, int32_t size);
 void StoreMsg(uint8_t command[], uint8_t *echoMsg);
 void ParsingInput(uint8_t command[], uint8_t *__token[], uint8_t *token_num);
-void Display_History(ProcessHist_t *pHistory, ProcessInfo_t *pInfo, uint32_t size);
 
 int main() {
     uint8_t *command;
@@ -124,7 +123,7 @@ int main() {
 			{
 				for(iterator = 1; iterator < myargc; iterator++) 
 				{
-        	           	 	RemoveFile(myargv[iterator]);
+        	        RemoveFile(myargv[iterator]);
 				}
 
 			} else if (!strcmp(myargv[0], "cd")) 
@@ -149,11 +148,11 @@ int main() {
 
 				if (Get_Size(&History) < NUM_PROCESS) 
 				{
-					Display_History(&History, &Info, Get_Size(&History));
+					Traverse_History(&History, Get_Size(&History));
 
 				} else 
 				{
-					Display_History(&History, &Info, NUM_PROCESS);
+					Traverse_History(&History, NUM_PROCESS);
 				}
 
 			}
@@ -231,7 +230,7 @@ void ParsingInput(uint8_t __command[], uint8_t *__token[], uint8_t *token_num) {
 }
 
 void StoreMsg(uint8_t command[], uint8_t *echoMsg) {
-		uint8_t i = 5;
+		uint8_t i = 7;
 	    uint8_t iterator = 0;
 
 		clearBuffer(echoMsg, COMMAND_SIZE);
@@ -253,10 +252,3 @@ void StoreMsg(uint8_t command[], uint8_t *echoMsg) {
 		echoMsg[iterator] = '\0';
 }
 
-void Display_History(ProcessHist_t *pHistory, ProcessInfo_t *pInfo, uint32_t size) {
-	for(int32_t iterator = 0; iterator < size; iterator++)
-	{
-		Pop_Process(pHistory, pInfo);
-		printf("%-8d %-10d %s\n", pInfo->pid__, pInfo->status__, pInfo->__cmd);
-	}
-}

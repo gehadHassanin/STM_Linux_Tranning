@@ -413,10 +413,19 @@ void Push_Process(ProcessHist_t *pHistory, ProcessInfo_t *pInfo) {
       pHistory->__info[pHistory->top__++] = *pInfo;
 }
 
-void Pop_Process(ProcessHist_t *pHistory, ProcessInfo_t *pInfo) {
-        *pInfo = pHistory->__info[--pHistory->top__];
+void Traverse_History(ProcessHist_t *pHistory, uint32_t size) {
+        int32_t index = size == NUM_PROCESS ? (pHistory->top__ - NUM_PROCESS) : 0;
+
+        for (int32_t iterator = 0; iterator < size; iterator++) 
+        {
+                Display_History(&pHistory->__info[index++]);
+        }
 }
 
 uint32_t Get_Size(ProcessHist_t *pHistory) {
         return pHistory->top__;
+}
+
+void Display_History(ProcessInfo_t *pInfo) {
+	printf("%-8d %-10d %s\n", pInfo->pid__, pInfo->status__, pInfo->__cmd);
 }
