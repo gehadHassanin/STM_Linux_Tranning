@@ -65,4 +65,5 @@ gcc commands.c femtoShell.c -o cmd
 <img src="https://github.com/user-attachments/assets/1fddeb79-e88e-4589-b302-063af34b78c1">
 <img src="https://github.com/user-attachments/assets/c6ab3094-d4d8-48ca-a478-b60eeaf84d5b">
 <img src="https://github.com/user-attachments/assets/a8c4c9bf-009e-43d7-a50b-edf453d14ca2">
+<img src="https://github.com/user-attachments/assets/87d1025d-2f98-42e2-8600-a98a15241ae4">
 
