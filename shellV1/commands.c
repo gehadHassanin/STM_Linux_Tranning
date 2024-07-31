@@ -345,7 +345,8 @@ int8_t CheckFileInPath(const uint8_t* filePath) {
 int8_t Is_InternalCmd(uint8_t *cmd) {
         for (int32_t Iterator = 0; __InternalCmd[Iterator] != NULL; Iterator++) 
         {
-                if (!strcmp(__InternalCmd[Iterator], cmd)) {
+                if (!strcmp(__InternalCmd[Iterator], cmd)) 
+		{
                         return 0;
                 }
         }
@@ -382,7 +383,8 @@ int8_t Is_ExternalCmd(const uint8_t *cmd) {
         }
 
         char *path_dub = strdup(env_path);
-        if (path_dub == NULL) {
+        if (path_dub == NULL)
+	{
             return -1; 
         }
 
