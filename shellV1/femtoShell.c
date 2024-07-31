@@ -166,33 +166,34 @@ int main() {
 	
         	if (ret_pid == 0) 
         	{
-	    	    // CHILD
-        	    myargc++;
-	    	    myargv[myargc - 1] = NULL;
-	    	    execvp (myargv[0], myargv);
-	    	    printf ("Exec failed\n");
-        	    exit(EXIT_FAILURE);
+			// CHILD
+        	        myargc++;
+	    	        myargv[myargc - 1] = NULL;
+	    	        execvp (myargv[0], myargv);
+	    	        printf ("Exec failed\n");
+        	        exit(EXIT_FAILURE);
 
         	} else if (ret_pid > 0) 
-        	{
-        	    // PARENT
-        	    int32_t wstatus;
-        	    if (wait(&wstatus) == -1) 
-		    {
-        	        perror("wait");
-        	    }
+        	{ 
+			// PARENT
+        	        int32_t wstatus;
+        	        if (wait(&wstatus) == -1) 
+		        {
+				perror("wait");
+        	        }
+			
+		        Info.status__ = WIFEXITED(wstatus);
+		        Info.pid__ = ret_pid;
+		        strcpy(Info.__cmd, myargv[0]);
 
-				Info.status__ = WIFEXITED(wstatus);
-				Info.pid__ = ret_pid;
-				strcpy(Info.__cmd, myargv[0]);
-
-				Push_Process(&History, &Info);
-        	    free(myargv);
-        	    free(command);
+		        Push_Process(&History, &Info);
+			
+		        free(myargv);
+        	        free(command);
 				
         	}else 
         	{
-        	    printf("Failed to create child process\n");
+			printf("Failed to create child process\n");
         	}
 
 
