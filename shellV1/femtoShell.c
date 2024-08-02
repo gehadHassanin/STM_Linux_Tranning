@@ -138,7 +138,7 @@ int main() {
 		{
 			ImplementTypeCommand(myargc, myargv);
 
-		} else if (!strcmp(myargv[0], "clear")) 
+		} else if (!strcmp(myargv[0], "myclear")) 
 		{
 			clear_screen();
 

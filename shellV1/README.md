@@ -38,7 +38,7 @@ gcc commands.c femtoShell.c -o cmd
 | envir variable | print the value of this environment variable if exists   |  variable             | envir  PATH  <BR>`or`<BR> envir anyVariable|    
 | type | return the type of the command (internal, external or unsupported command)   |  command            | type ls <BR>`or`<BR> type mypwd|  
 | phist | lists the last 10 processes with their exit status   |  no           | phist | 
-| clear | clear the terminal screen   |  no           | clear | 
+| myclear | clear the terminal screen   |  no           | myclear | 
 # External Commands
 **The shell supports executing external commands available in the directories specified by the PATH environment variable. Commands can be executed by simply entering their names, without requiring the full path** <BR> 
 

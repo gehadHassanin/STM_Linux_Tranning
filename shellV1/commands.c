@@ -24,6 +24,7 @@ uint8_t *__InternalCmd[] = {
         "myrealpath",
         "myrmdir", 
         "myrm",
+        "myclear",
         "cd", 
         "envir",
         "type",
