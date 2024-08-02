@@ -4,7 +4,7 @@ Supported Internal commands are:
     3) mypwd: print working directory.
     4) mycat: concatenate files and print on the standard output.
     5) myecho: print a user input string on stdout.
-    6) realpath:  Print the resolved absolute file name.
+    6) myrealpath:  Print the resolved absolute file name.
     7) exit: terminate the shell.
     8) myrm: remove files 
     9) myrmdir: remove directories
