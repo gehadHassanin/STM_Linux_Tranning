@@ -1,15 +1,15 @@
 Supported Internal commands are:
-    1) cp: copy a file to another file.
-    2) mv: move a file to another place.
-    3) pwd: print working directory.
-    4) cat: concatenate files and print on the standard output.
-    5) echo: print a user input string on stdout.
+    1) mycp: copy a file to another file.
+    2) mymv: move a file to another place.
+    3) mypwd: print working directory.
+    4) mycat: concatenate files and print on the standard output.
+    5) myecho: print a user input string on stdout.
     6) realpath:  Print the resolved absolute file name.
     7) exit: terminate the shell.
-    8) rm: remove files 
-    9) rmdir: remove directories
+    8) myrm: remove files 
+    9) myrmdir: remove directories
     10) envir: print all the environment variables
     11) type: return the type of the command (internal, external or unsupported command)
     12) phist: Lists the last 10 processes with their exit status.
     13) cd: change the current directory
-    14) clear: clear the terminal screen
+    14) myclear: clear the terminal screen
