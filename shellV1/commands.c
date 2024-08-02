@@ -274,7 +274,7 @@ void ImplementEnvCommand(uint8_t argc, uint8_t** argv) {
 
         } else 
         {
-                printf("\n");
+                printf("env: ‘%s’: No such file or directory\n", argv[1]);
         }
 }
 
