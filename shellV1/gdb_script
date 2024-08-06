@@ -1,0 +1,26 @@
+
+define disblay_cmd_info
+    set $idx = 0
+    while($idx < myargc)
+        if $idx == 0 
+            printf "Command name: %s\n", myargv[$idx++]
+            if myargc == 1
+                printf "%s\n", "[No arguments]"
+            end
+        else
+            printf "argument [%d]: %s\n", $idx, myargv[$idx++]
+        end
+    end
+end
+
+document disblay_cmd_info
+    Usage: display_cmd_info
+
+     This command displays the name and arguments of the command provided
+     in the 'myargv' array. The first element is considered the command name,
+     while subsequent elements are treated as arguments.
+     
+     If there are no additional arguments, it will print "No arguments".
+     If 'myargc' is zero, indicating no command and arguments, it will state
+     that no command name or arguments were provided.
+end

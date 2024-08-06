@@ -65,5 +65,8 @@ gcc commands.c femtoShell.c -o cmd
 <img src="https://github.com/user-attachments/assets/1fddeb79-e88e-4589-b302-063af34b78c1">
 <img src="https://github.com/user-attachments/assets/c6ab3094-d4d8-48ca-a478-b60eeaf84d5b">
 <img src="https://github.com/user-attachments/assets/a8c4c9bf-009e-43d7-a50b-edf453d14ca2">
-<img src="https://github.com/user-attachments/assets/0c904884-e28e-472b-8f03-60c100400443">
+<img src="https://github.com/user-attachments/assets/0c904884-e28e-472b-8f03-60c100400443"> <BR>
 
+
+# GDB Script:
+For GDB usage you can see [GDB Usage](https://github.com/user-attachments/assets/0bdfe8f3-8ae8-426d-b634-68be87ab5075) video.
