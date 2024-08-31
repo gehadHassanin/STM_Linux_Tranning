@@ -58,9 +58,10 @@ int main(int argc, char** argv) {
 			    512) / (1024 * 1024 * 1024)),
             pPartitionEntry[i].partitionType);
 
-	    if (table_entry_ptr[i].partition_type == EXTENDED) {              
-	        ReadExtended(argv, table_entry_ptr[i].lba);
+	    if (pPartitionEntry[i].partitionType == EXTENDED) {              
+	        ReadExtended(argv, pPartitionEntry[i].lba);
 	    }   
     }
 
+    return 0;
 }
